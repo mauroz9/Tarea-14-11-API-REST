@@ -42,7 +42,7 @@ public class MonumentController {
     @PostMapping
     public ResponseEntity<String> createMonument(Monument monument) {
         try {
-            Monument savedMonument = monumentRepository.save(crearMonumento);
+            Monument savedMonument = monumentRepository.save(monument);
             return ResponseEntity.status(HttpStatus.CREATED).body("Monumento creado: " + savedMonument);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al crear el monumento");
