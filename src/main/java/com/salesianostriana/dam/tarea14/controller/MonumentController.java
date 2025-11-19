@@ -2,8 +2,15 @@ package com.salesianostriana.dam.tarea14.controller;
 
 import com.salesianostriana.dam.tarea14.model.Monument;
 import com.salesianostriana.dam.tarea14.repository.MonumentRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,20 +25,45 @@ public class MonumentController {
     private final MonumentRepository monumentRepository;
 
     @GetMapping
-    public ResponseEntity<List<Monument>> getAllMonuments(){
+    @Operation(summary = "Muestra todos los monumentos almacenados")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "Productos encontrados",
+                    content = @Content(
+                            mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = Monument.class))
+                    )
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "No hay monumentos",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDetail.class)
+                    )
+            )
+    })
+    public ResponseEntity<List<Monument>> getAllMonuments() {
         List<Monument> monuments = monumentRepository.findAll();
 
-        if(monuments.isEmpty()){
+        if (monuments.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(monuments);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Monument> getMonumentById(@PathVariable Long id){
-        Optional<Monument> monumentOpt =  monumentRepository.findById(id);
+    @Operation(summary = "Obtener un monumento específica por su ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    description = "Monumento encontrado",
+                    content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Monument.class))),
+            @ApiResponse(responseCode = "404", description = "No se ha encontrado monumento")
+    })
+    public ResponseEntity<Monument> getMonumentById(@PathVariable Long id) {
+        Optional<Monument> monumentOpt = monumentRepository.findById(id);
 
-        if(monumentOpt.isEmpty()){
+        if (monumentOpt.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -40,6 +72,8 @@ public class MonumentController {
     }
 
     @PostMapping
+    @Operation(summary = "Crea un monumento nuevo")
+    @ApiResponse(responseCode = "201", description = "Monumento creado correctamente")
     public ResponseEntity<String> createMonument(Monument monument) {
         try {
             Monument savedMonument = monumentRepository.save(monument);
@@ -50,8 +84,9 @@ public class MonumentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateMonument(
-            @PathVariable Long id, Monument monument) {
+    @Operation(summary = "Modificar un monumento")
+    @ApiResponses({@ApiResponse(responseCode = "200", description = "Monumento modificado"), @ApiResponse(responseCode = "404", description = "Monumento no encontrado")})
+    public ResponseEntity<String> updateMonument(@PathVariable Long id, Monument monument) {
 
         if (!monumentRepository.existsById(id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se ha encontrado el monumento");
@@ -74,12 +109,6 @@ public class MonumentController {
         monumentRepository.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Monumento eliminado");
     }
-
-
-
-
-
-
 
 
 }

@@ -4,3 +4,30 @@ select m1_0.id,m1_0.city_name,m1_0.country_code,m1_0.country_name,m1_0.descripti
 2025-11-14 11:54:09.367817+01:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
 select m1_0.id,m1_0.city_name,m1_0.country_code,m1_0.country_name,m1_0.description,m1_0.latitude,m1_0.longitude,m1_0.monument_name,m1_0.photo_url from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:52:24.392873+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:53:12.575023+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:54:16.132608+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:54:39.609999+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:54:40.566754+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:55:30.133528+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:55:31.420000+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:55:52.689506+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
+2025-11-19 12:55:53.597486+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MONUMENT" not found (this database is empty); SQL statement:
+select count(*) from monument m1_0 where m1_0.id=? [42104-232]
